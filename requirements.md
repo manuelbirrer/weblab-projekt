@@ -6,7 +6,7 @@ Der Kochplaner hilft einer Familie bzw. Wohngemeinschaft dabei den Überblick zu
 
 Dazu gehört eine Ansicht, z.B. als Kalender, bei welcher alle geplanten Mahlzeiten übersichtlich dargestellt werden. Über diese Ansicht können sich die Benutzer auch für eingetragene Mahlzeiten anmelden. Zusätzlich kann darüber auch ein Formular zum Erfassen einer neuen Mahlzeit aufgerufen werden.
 
-Zu diesem Planer gehört optional auch eine Rezeptverwaltung. Dabei bleibt aber noch offen, ob diese nur dazu dient, Links/Texte zu speichern, oder ob einzelne Zutaten verwalten werden.
+Zu diesem Planer gehört optional auch eine Rezeptverwaltung. Dabei bleibt aber noch offen, ob diese nur dazu dient, Links/Texte zu speichern, oder ob einzelne Zutaten verwaltet werden.
 
 ## Anforderungen
 
@@ -27,7 +27,7 @@ Als Familienmitglied kann ich den Plan ansehen und für die Mahlzeiten eine Deta
 
 **Akzeptanzkriteren**
 * Mahlzeiten werden in einem Kalender oder ähnlicher Darstellungsart angezeigt
-* Mahlzeiten können angeklickt werden um alle damit verbundenen Informationen in einer
+* Mahlzeiten können angeklickt werden um alle damit verbundenen Informationen in einer Detailansicht anzusehen
 
 
 #### User Story 3: Mahlzeit erfassen (Prio 'Must')
@@ -56,7 +56,7 @@ Als Familienmitglied kann ich eine neue Mahlzeit erfassen.
 
 #### User Story 4: Bei Mahlzeit anmelden/abmelden (Prio 'Must')
 
-Als Familienmitglied kann ich mich bei einer Mahlzeit anmelden/abmelden.
+Als Familienmitglied kann ich mich bei einer Mahlzeit anmelden/abmelden und sehen wer angemeldet ist.
 
 **Akzeptanzkriterien**
 
