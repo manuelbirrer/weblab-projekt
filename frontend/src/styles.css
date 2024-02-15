@@ -1,0 +1,40 @@
+/* Reset */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* Custom properties */
+
+:root {
+  --card-bg: #e0e0e0;
+  --accent: #0d7069;
+  --light-font: #ffffff;
+}
+
+/* Global */
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f1f1f1;
+}

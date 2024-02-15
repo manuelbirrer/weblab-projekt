@@ -1,0 +1,8 @@
+@if (meal) {
+  <div class="meal-detail">
+    <p>ID: {{ meal._id }}</p>
+    <p>Date: {{ meal.date | date : 'medium' }}</p>
+    <p>Recipe: {{ meal.recipe }}</p>
+    <p>Cook: {{ meal.cook }}</p>
+  </div>
+}

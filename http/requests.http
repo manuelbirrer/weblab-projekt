@@ -1,0 +1,13 @@
+
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "user": "admin",
+  "pass": "pass"
+}
+
+###
+
+GET {{host}}/meals
+Authorization: Bearer {{token}}

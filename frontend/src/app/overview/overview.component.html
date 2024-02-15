@@ -1,0 +1,25 @@
+<div class="calendar">
+  <div class="days">
+    @for (day of days; track day) {
+      <div class="day" [class.today]="isToday(day.date)">
+        <div class="date">
+          <p>{{ day.date | date:"dd.MM" }}</p>
+          <p>{{ day.date | date:"E" | uppercase }}</p>
+        </div>
+        @for (meal of day.meals; track meal) {
+          <a class="meal" routerLink="/meal/{{meal._id}}">
+            <p>{{ meal.date | date:"HH:mm" }}</p>
+            <p>{{ meal.recipe }}</p>
+          </a>
+        }
+      </div>
+    }
+  </div>
+  @if (week) {
+    <div class="week-switcher">
+      <a class="prev-week" routerLink="/week-of/{{week.prevMonday | date:'YYYY-MM-dd' }}">Prev</a>
+      <span class="cur-week">{{ week.monday | date:'shortDate' }} - {{ week.sunday | date:'shortDate' }}</span>
+      <a class="next-week" routerLink="/week-of/{{week.nextMonday | date:'YYYY-MM-dd' }}">Next</a>
+    </div>
+  }
+</div>
