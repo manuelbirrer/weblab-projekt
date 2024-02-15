@@ -1,10 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import {auth} from 'express-oauth2-jwt-bearer';
-import authConfig from '../../auth_config.json';
+import {expressjwt} from 'express-jwt';
 
 import {router as mealsRouter} from "./endpoints/meals";
+import {router as loginRouter} from "./endpoints/login";
 import bodyParser from "body-parser";
 
 try {
@@ -18,10 +18,10 @@ try {
     console.log(error);
 }
 
-const checkJwt = auth({
-    audience: authConfig.authorizationParams.audience,
-    issuerBaseURL: `https://${authConfig.domain}`
-});
+const eJwt = expressjwt({
+    secret: "badsecret",
+    algorithms: ["HS256"]
+})
 
 const app = express();
 
@@ -35,7 +35,8 @@ app.get("/", async (req, res) => {
     res.json({message: "Hello from the API"});
 });
 
-app.use("/meals", checkJwt, mealsRouter);
+app.use("/login", loginRouter)
+app.use("/meals", mealsRouter);
 
 app.listen(3000);
 

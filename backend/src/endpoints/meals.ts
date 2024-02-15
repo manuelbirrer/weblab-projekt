@@ -4,7 +4,6 @@ import Meal from "../models/meal";
 export const router = express.Router();
 
 router.get("/", async (req, res) => {
-    console.log(req.auth);
     const filter: {date?: {$gte?: Date, $lte?: Date}} = {};
 
     if (req.query["from"]) {

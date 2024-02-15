@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DateHelper, DayOfMeals, Meal, Week} from "./calendar";
 import {HttpClient} from "@angular/common/http";
-import {map, of} from "rxjs";
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
