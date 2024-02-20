@@ -25,6 +25,6 @@ router.post("/", async (req, res) => {
     }
     const expiresInSeconds = Number(process.env.JWT_EXPIRES_IN_SECONDS);
     const expiresAtSeconds = Math.floor(Date.now() / 1000) + expiresInSeconds;
-    const token = jwt.sign({exp: expiresAtSeconds, user: user.username}, process.env.JWT_SECRET as string);
-    res.json({jwt: { access_token: token, expires_at: expiresAtSeconds * 1000 } });
+    const token = jwt.sign({exp: expiresAtSeconds, user: user._id}, process.env.JWT_SECRET as string);
+    res.json({jwt: { access_token: token, expires_at: expiresAtSeconds * 1000, user_id: user._id } });
 });

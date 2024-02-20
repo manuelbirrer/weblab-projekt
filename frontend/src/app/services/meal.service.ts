@@ -18,7 +18,7 @@ export class MealService {
     return this.http.get<Meal[]>(`${env.apiUrl}/meals?from=${from}&to=${to}`)
       .pipe(
         map(data => {
-          return this.structureInDays(data, week);
+          return MealService.structureInDays(data, week);
         })
       );
   }
@@ -31,7 +31,15 @@ export class MealService {
     return this.http.post<any>(`${env.apiUrl}/meals`, meal);
   }
 
-  structureInDays(meals: Meal[], week: Week): DayOfMeals[] {
+  addGuestToMeal(mealId: string, userId: string) {
+    return this.http.post(`${env.apiUrl}/meals/${mealId}/guests`, {guest: userId});
+  }
+
+  removeGuestFromMeal(mealId: string, userId: string) {
+    return this.http.delete(`${env.apiUrl}/meals/${mealId}/guests/${userId}`);
+  }
+
+  static structureInDays(meals: Meal[], week: Week): DayOfMeals[] {
     const date: Date = week.monday;
     const days: DayOfMeals[] = [];
     for (let i = 0; i < 7; i++) {

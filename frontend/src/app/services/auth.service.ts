@@ -20,6 +20,7 @@ export class AuthService {
     if (loginResponse["jwt"]) {
       localStorage.setItem("access_token", loginResponse.jwt.access_token);
       localStorage.setItem("expires_at", loginResponse.jwt.expires_at);
+      localStorage.setItem("user_id", loginResponse.jwt.user_id);
     }
     return loginResponse;
   }
@@ -27,6 +28,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem("access_token");
     localStorage.removeItem("expires_at");
+    localStorage.removeItem("user_id");
   }
 
   isLoggedIn(): boolean {
@@ -46,4 +48,7 @@ export class AuthService {
     return this.http.post<any>(`${env.apiUrl}/users`, {username: username, password: password});
   }
 
+  getUserId() {
+    return localStorage.getItem("user_id") ?? "";
+  }
 }

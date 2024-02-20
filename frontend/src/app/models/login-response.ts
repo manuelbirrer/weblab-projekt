@@ -3,5 +3,6 @@ export interface LoginResponse {
   jwt?: {
     access_token: string;
     expires_at: string;
+    user_id: string;
   }
 }
