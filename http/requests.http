@@ -18,9 +18,9 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "date": "2024-02-16T12:00",
+  "date": "2024-02-21T12:00",
   "recipe": "asdf",
-  "cook": "asdf",
+  "cook": "65cf348fd2aeeffb594f82e0",
   "note": "asdf"
 }
 
@@ -53,3 +53,19 @@ Content-Type: application/json
 {
   "verified": true
 }
+
+
+###
+
+POST {{host}}/meals/65d47c88bb3c4604517f489b/guests
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "guest": "65cf5e7c803e30808f426606"
+}
+
+###
+
+DELETE {{host}}/meals/65d47c88bb3c4604517f489b/guests/65cf5e7c803e30808f426606
+Authorization: Bearer {{token}}

@@ -5,7 +5,6 @@ import User from "../models/user";
 export const router = express.Router();
 
 router.post("/", async (req, res) => {
-    console.log(new Date().toISOString(), "login request");
     if (!req.body["username"] || !req.body["password"]) {
         res.status(401);
         res.json({message: "Unauthorized"});

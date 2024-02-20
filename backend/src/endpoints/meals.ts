@@ -4,7 +4,7 @@ import Meal from "../models/meal";
 export const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const filter: {date?: {$gte?: Date, $lte?: Date}} = {};
+    const filter: { date?: { $gte?: Date, $lte?: Date } } = {};
 
     if (req.query["from"]) {
         const fromDate = new Date(req.query.from as string);
@@ -46,12 +46,37 @@ router.get("/:id", async (req, res) => {
     res.json(await Meal.findById(req.params.id));
 });
 
-router.put("/meals/hardcoded", async (req, res) => {
-    await Meal.create({
-        date: new Date("2024-02-13T18:00"),
-        recipe: "asdf",
-        cook: "me"
-    })
-    res.json({})
+router.post("/:id/guests", async (req, res) => {
+    if (!req.body["guest"]) {
+        res.status(400);
+        res.json({ status: 400, message: "No guest specified"});
+        return;
+    }
+    try {
+        await Meal.findByIdAndUpdate(
+            req.params.id,
+            {$addToSet: {guests: req.body.guest}}
+        );
+        res.json({});
+        return;
+    } catch (e) {
+        res.status(400);
+        res.json({});
+        return;
+    }
 });
 
+router.delete("/:id/guests/:guestId", async (req, res) => {
+    try {
+        await Meal.findByIdAndUpdate(
+            req.params.id,
+            {$pull: {guests: req.params.guestId}}
+        );
+        res.json({});
+        return;
+    } catch (e) {
+        res.status(400);
+        res.json({});
+        return;
+    }
+});

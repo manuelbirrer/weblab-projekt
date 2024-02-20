@@ -17,11 +17,13 @@ const schema = new Schema<IUser, UserModel, IUserMethods>({
     username: {
         type: String,
         required: true,
+        minlength: 4,
         unique: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        minlength: 8
     },
     verified: {
         type: Boolean,

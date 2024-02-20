@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from 'mongoose';
 import cors from 'cors';
 import {eJwt} from "./ejwt";
+import morgan from "morgan";
 
 
 import {router as loginRouter} from "./endpoints/login";
@@ -27,6 +28,8 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
+
+app.use(morgan('tiny'));
 
 app.get("/", async (req, res) => {
     res.json({message: "Hello from the API"});
