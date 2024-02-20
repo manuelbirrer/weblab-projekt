@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {MealService} from "../meal.service";
+import {MealService} from "../../services/meal.service";
 import {ActivatedRoute} from "@angular/router";
-import {Meal} from "../calendar";
 import {DatePipe} from "@angular/common";
+import { Meal } from '../../models/meal';
 
 @Component({
   selector: 'app-meal-detail',

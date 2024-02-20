@@ -1,0 +1,38 @@
+<div class="registration">
+  <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)" >
+    <h1>New user</h1>
+    <label>
+      Username
+      <input type="text" name="username" #username="ngModel" [(ngModel)]="model.username" minlength="4" required>
+      @if (username.invalid && username.touched) {
+        <span class="error">
+          @if (username.hasError("minlength")) {
+            Must be at least 4 characters
+          }
+          @else {
+            Required
+          }
+        </span>
+      }
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" minlength="8" required>
+      @if (password.invalid && password.touched) {
+        <span class="error">
+          @if (password.hasError("minlength")) {
+            Must be at least 8 characters
+          }
+          @else {
+            Required
+          }
+        </span>
+      }
+    </label>
+    <button type="submit" [disabled]="registrationForm.invalid">Sign up</button>
+    <p>
+      Already signed up?
+      <a routerLink="/login">Login</a>
+    </p>
+  </form>
+</div>

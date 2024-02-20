@@ -20,9 +20,14 @@ input, button, textarea, select {
 /* Custom properties */
 
 :root {
-  --card-bg: #e0e0e0;
   --accent: #0d7069;
-  --light-font: #ffffff;
+  --accent-focus: #0b564f;
+  --accent-muted: #3d5d5a;
+  --white: white;
+  --light-font: white;
+  --card-bg: #e0e0e0;
+  --card-radius: .75rem;
+  --input-radius: .5rem;
 }
 
 /* Global */
@@ -37,4 +42,46 @@ body {
   justify-content: center;
   min-height: 100vh;
   background: #f1f1f1;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+input, button, textarea, select {
+  padding: .25rem .5rem;
+  border-radius: var(--input-radius);
+  background: var(--white);
+}
+
+input, textarea, select {
+  border: 1px solid black;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.error {
+  color: red;
+}
+
+button {
+  border: none;
+  color: var(--light-font);
+  background: var(--accent);
+}
+
+button:hover {
+  cursor: pointer;
+  background: var(--accent-focus);
+}
+
+button[disabled] {
+  background: var(--accent-muted);
+}
+
+.ng-invalid.ng-touched {
+  border-color: red;
 }

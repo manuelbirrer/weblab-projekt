@@ -1,0 +1,42 @@
+<div class="new-meal">
+  <form #mealForm="ngForm" (ngSubmit)="onSubmit(mealForm)">
+    <h1>Add meal</h1>
+    <label>
+      Date
+      <input type="date" name="date" #date="ngModel" [(ngModel)]="model.date" required>
+      @if (date.invalid && date.touched) {
+        <span class="error">Invalid date</span>
+      }
+    </label>
+    <label>
+      Time
+      <input type="time" name="time" #time="ngModel" [(ngModel)]="model.time" required>
+      @if (time.invalid && time.touched) {
+        <span class="error">Invalid time</span>
+      }
+    </label>
+    <label>
+      Meal
+      <input type="text" name="recipe" #recipe="ngModel" [(ngModel)]="model.recipe" required>
+      @if (recipe.invalid && recipe.touched) {
+        <span class="error">Required</span>
+      }
+    </label>
+    <label>
+      Cook
+      <select name="cook" #cook="ngModel" [(ngModel)]="model.cook" required>
+        @for (user of users; track user) {
+          <option value="{{user._id}}">{{ user.username }}</option>
+        }
+      </select>
+      @if (cook.invalid && cook.touched) {
+        <span class="error">Required</span>
+      }
+    </label>
+    <label>
+      Note
+      <textarea name="note" rows="3" [(ngModel)]="model.note"></textarea>
+    </label>
+    <button type="submit" [disabled]="mealForm.invalid">Save</button>
+  </form>
+</div>

@@ -1,13 +1,55 @@
-
 POST {{host}}/login
 Content-Type: application/json
 
 {
-  "user": "admin",
-  "pass": "pass"
+  "username": "manuel",
+  "password": "test1234"
 }
 
 ###
 
 GET {{host}}/meals
 Authorization: Bearer {{token}}
+
+###
+
+POST {{host}}/meals
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "date": "2024-02-16T12:00",
+  "recipe": "asdf",
+  "cook": "asdf",
+  "note": "asdf"
+}
+
+###
+
+POST {{host}}/users
+Content-Type: application/json
+
+{
+  "username": "manuel",
+  "password": "test1234"
+}
+
+###
+
+GET {{host}}/users
+Authorization: Bearer {{token}}
+
+###
+
+GET{{host}}/users/65cf348fd2aeeffb594f82e0
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{host}}/users/65cf5e7c803e30808f426606
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "verified": true
+}

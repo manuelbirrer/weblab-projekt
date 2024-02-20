@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MealService} from "../meal.service";
-import {DateHelper, DayOfMeals, Week} from "../calendar";
+import {MealService} from "../../services/meal.service";
+import {DateHelper, DayOfMeals, Week} from "../../calendar";
 import {DatePipe, UpperCasePipe} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
+import {LogoutComponent} from "../logout/logout.component";
 
 @Component({
   selector: 'app-overview',
@@ -10,7 +11,8 @@ import {ActivatedRoute, RouterLink} from "@angular/router";
   imports: [
     DatePipe,
     UpperCasePipe,
-    RouterLink
+    RouterLink,
+    LogoutComponent
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
@@ -41,7 +43,7 @@ export class OverviewComponent implements OnInit {
   }
 
   getMeals(week: Week) {
-    this.mealService.getMeals(week).subscribe(days => {
+    this.mealService.getMealsOf(week).subscribe(days => {
       this.days = days;
     });
   }

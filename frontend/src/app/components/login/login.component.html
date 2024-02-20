@@ -1,0 +1,18 @@
+<div class="login">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
+    <h1>Login</h1>
+    <label>
+      Username
+      <input type="text" name="username" [(ngModel)]="model.username" required>
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" [(ngModel)]="model.password" required>
+    </label>
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    <p>
+      No account yet?
+      <a routerLink="/register">Sign up</a>
+    </p>
+  </form>
+</div>

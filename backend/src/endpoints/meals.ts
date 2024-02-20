@@ -30,8 +30,20 @@ router.get("/", async (req, res) => {
     res.json(await Meal.find(filter));
 });
 
+router.post("/", async (req, res) => {
+    try {
+        await Meal.create(req.body)
+        res.json({});
+        return;
+    } catch (e) {
+        res.status(400);
+        res.json({});
+        return;
+    }
+})
+
 router.get("/:id", async (req, res) => {
-    res.json(await Meal.findOne({_id: req.params.id}));
+    res.json(await Meal.findById(req.params.id));
 });
 
 router.put("/meals/hardcoded", async (req, res) => {
@@ -42,3 +54,4 @@ router.put("/meals/hardcoded", async (req, res) => {
     })
     res.json({})
 });
+

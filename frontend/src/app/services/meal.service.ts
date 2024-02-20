@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {DateHelper, DayOfMeals, Meal, Week} from "./calendar";
+import {DateHelper, DayOfMeals, Week} from "../calendar";
+import {Meal} from "../models/meal";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
+import {environment as env} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +12,10 @@ export class MealService {
 
   constructor(private http: HttpClient) {}
 
-  getMeals(week: Week) {
+  getMealsOf(week: Week) {
     const from = week.monday.toISOString();
     const to = week.sunday.toISOString();
-    return this.http.get<Meal[]>(`http://localhost:3000/meals?from=${from}&to=${to}`)
+    return this.http.get<Meal[]>(`${env.apiUrl}/meals?from=${from}&to=${to}`)
       .pipe(
         map(data => {
           return this.structureInDays(data, week);
@@ -22,7 +24,11 @@ export class MealService {
   }
 
   getMeal(id: string) {
-    return this.http.get<Meal>(`http://localhost:3000/meals/${id}`);
+    return this.http.get<Meal>(`${env.apiUrl}/meals/${id}`);
+  }
+
+  addMeal(meal: Meal) {
+    return this.http.post<any>(`${env.apiUrl}/meals`, meal);
   }
 
   structureInDays(meals: Meal[], week: Week): DayOfMeals[] {

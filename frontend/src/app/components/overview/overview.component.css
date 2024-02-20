@@ -79,3 +79,18 @@
 .next-week {
   border-radius: 0 .75rem .7rem 0;
 }
+
+@media (width < 1200px) {
+  .days {
+    grid-template-columns: none;
+    grid-template-rows: repeat(7, 1fr);
+  }
+
+  .day {
+    flex-direction: row;
+  }
+
+  .meal {
+    flex-basis: 200px;
+  }
+}

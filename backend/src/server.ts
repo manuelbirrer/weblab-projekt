@@ -1,11 +1,13 @@
 import express from 'express';
+import bodyParser from "body-parser";
 import mongoose from 'mongoose';
 import cors from 'cors';
-import {expressjwt} from 'express-jwt';
+import {eJwt} from "./ejwt";
 
-import {router as mealsRouter} from "./endpoints/meals";
+
 import {router as loginRouter} from "./endpoints/login";
-import bodyParser from "body-parser";
+import {router as mealsRouter} from "./endpoints/meals";
+import {router as usersRouter} from "./endpoints/users";
 
 try {
     await mongoose.connect("mongodb://127.0.0.1:27017/weblab", {
@@ -17,11 +19,6 @@ try {
 } catch (error) {
     console.log(error);
 }
-
-const eJwt = expressjwt({
-    secret: "badsecret",
-    algorithms: ["HS256"]
-})
 
 const app = express();
 
@@ -36,7 +33,8 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/login", loginRouter)
-app.use("/meals", mealsRouter);
+app.use("/meals", eJwt, mealsRouter);
+app.use("/users", usersRouter);
 
 app.listen(3000);
 
