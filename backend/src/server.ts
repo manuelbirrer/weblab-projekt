@@ -4,18 +4,21 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import {eJwt} from "./ejwt";
 import morgan from "morgan";
+import dotenv from "dotenv";
 
+dotenv.config();
+const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
 
 import {router as loginRouter} from "./endpoints/login";
 import {router as mealsRouter} from "./endpoints/meals";
 import {router as usersRouter} from "./endpoints/users";
 
 try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/weblab", {
+    await mongoose.connect(`${DB_HOST}/${DB_NAME}`, {
         serverSelectionTimeoutMS: 5000,
         authSource: "admin",
-        user: "root",
-        pass: "pass"
+        user: DB_USER,
+        pass: DB_PASSWORD
     });
 } catch (error) {
     console.log(error);
