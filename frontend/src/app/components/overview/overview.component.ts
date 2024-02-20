@@ -3,7 +3,6 @@ import {MealService} from "../../services/meal.service";
 import {DateHelper, DayOfMeals, Week} from "../../calendar";
 import {DatePipe, UpperCasePipe} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {LogoutComponent} from "../logout/logout.component";
 
 @Component({
   selector: 'app-overview',
@@ -11,8 +10,7 @@ import {LogoutComponent} from "../logout/logout.component";
   imports: [
     DatePipe,
     UpperCasePipe,
-    RouterLink,
-    LogoutComponent
+    RouterLink
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'

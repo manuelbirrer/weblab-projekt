@@ -1,0 +1,11 @@
+<header class="container">
+  @if (isLoggedIn()) {
+    <nav>
+      <a routerLink="/">Overview</a>
+    </nav>
+    <div class="profile">
+      <app-user [id]="userId"></app-user>
+      <app-logout></app-logout>
+    </div>
+  }
+</header>
