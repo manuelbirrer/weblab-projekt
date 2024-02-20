@@ -1,14 +1,10 @@
 import express from 'express';
 import User from '../models/user'
-import {eJwt} from "../ejwt";
 
+export const publicRouter = express.Router();
 export const router = express.Router();
 
-router.get("/", eJwt, async (req, res) => {
-    res.json(await User.find().select(["username", "verified"]));
-});
-
-router.post("/", async (req, res) => {
+publicRouter.post("/", async (req, res) => {
     if (!req.body["username"] || !req.body["password"]) {
         res.status(400);
         res.json({message: "Missing fields"});
@@ -20,16 +16,28 @@ router.post("/", async (req, res) => {
         res.json({message: "Username in use"});
         return;
     }
-    const user = await User.create({
-        username: username,
-        password: req.body["password"]
-    });
-    res.location("/users/" + user._id);
-    res.status(201);
-    res.json({});
+    try {
+        const user = await User.create({
+            username: username,
+            password: req.body["password"]
+        });
+        res.location("/users/" + user._id);
+        res.status(201);
+        res.json({});
+        return;
+    } catch (e) {
+        res.status(400);
+        res.json({})
+        return;
+    }
 });
 
-router.get("/:id", eJwt, async (req, res) => {
+
+router.get("/", async (req, res) => {
+    res.json(await User.find().select(["username", "verified"]));
+});
+
+router.get("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
@@ -44,7 +52,7 @@ router.get("/:id", eJwt, async (req, res) => {
     }
 });
 
-router.put("/:id", eJwt, async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {

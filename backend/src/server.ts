@@ -1,17 +1,23 @@
+import dotenv from "dotenv";
 import express from 'express';
 import bodyParser from "body-parser";
 import mongoose from 'mongoose';
 import cors from 'cors';
-import {eJwt} from "./ejwt";
 import morgan from "morgan";
-import dotenv from "dotenv";
-
-dotenv.config();
-const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
+import {expressjwt} from "express-jwt";
 
 import {router as loginRouter} from "./endpoints/login";
 import {router as mealsRouter} from "./endpoints/meals";
-import {router as usersRouter} from "./endpoints/users";
+import {router as usersRouter, publicRouter as publicUsersRouter} from "./endpoints/users";
+
+dotenv.config();
+
+const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, JWT_SECRET, JWT_EXPIRES_IN_SECONDS } = process.env;
+
+if (!DB_HOST || !DB_NAME || !DB_USER || !DB_PASSWORD || !JWT_SECRET || !JWT_EXPIRES_IN_SECONDS) {
+    console.error("One ore more env vars not set");
+    process.exit(1);
+}
 
 try {
     await mongoose.connect(`${DB_HOST}/${DB_NAME}`, {
@@ -23,6 +29,11 @@ try {
 } catch (error) {
     console.log(error);
 }
+
+const eJwt = expressjwt({
+    secret: process.env.JWT_SECRET as string,
+    algorithms: ["HS256"]
+})
 
 const app = express();
 
@@ -40,7 +51,8 @@ app.get("/", async (req, res) => {
 
 app.use("/login", loginRouter)
 app.use("/meals", eJwt, mealsRouter);
-app.use("/users", usersRouter);
+app.use("/users", publicUsersRouter);
+app.use("/users", eJwt, usersRouter);
 
 app.listen(3000);
 
