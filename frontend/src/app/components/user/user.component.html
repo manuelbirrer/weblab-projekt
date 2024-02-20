@@ -1,0 +1,6 @@
+@if (user) {
+  <span class="user">
+    <div class="avatar" [style.background]="getBackgroundColor()">{{user.username.substring(0, 1)}}</div>
+    <span>{{ user.username }}</span>
+  </span>
+}

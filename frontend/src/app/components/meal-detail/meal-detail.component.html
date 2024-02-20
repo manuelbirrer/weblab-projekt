@@ -1,9 +1,16 @@
 @if (meal) {
   <div class="meal-detail">
-    <p>ID: {{ meal._id }}</p>
     <p>Date: {{ meal.date | date : 'medium' }}</p>
     <p>Recipe: {{ meal.recipe }}</p>
-    <p>Cook: {{ meal.cook }}</p>
+    <p>Cook: <app-user id="{{meal.cook}}"></app-user></p>
     <p>Note: {{ meal.note }}</p>
+    @if (meal.guests) {
+      <p>
+        Guests:
+        @for (guest of meal.guests; track meal) {
+          <app-user id="{{guest}}"></app-user>
+        }
+      </p>
+    }
   </div>
 }
