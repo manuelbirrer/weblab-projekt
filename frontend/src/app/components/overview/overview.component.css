@@ -7,7 +7,6 @@
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
   min-height: 400px;
 }
 
@@ -17,6 +16,12 @@
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
+  padding: .5rem;
+  overflow-y: scroll;
+}
+
+.day:not(:last-child) {
+  border-right: 1px dashed black;
 }
 
 .date {
@@ -28,7 +33,7 @@
   padding: .5rem;
   color: var(--accent);
   font-weight: bold;
-  border:3px solid var(--accent);
+  border: 3px solid var(--accent);
   border-radius: 1rem;
 }
 
@@ -38,6 +43,9 @@
 }
 
 .meal {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
   color: inherit;
   text-decoration: none;
   align-self: stretch;
@@ -46,9 +54,14 @@
   border-radius: .75rem;
 }
 
-.meal p:first-child {
-  border-bottom: 1px solid black;
-  margin-bottom: .5rem;
+.time {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.time img {
+  width: 1.5rem;
 }
 
 .week-switcher {
@@ -90,7 +103,23 @@
     flex-direction: row;
   }
 
+  .day:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px dashed black;
+  }
+
   .meal {
-    flex-basis: 200px;
+    flex-basis: 150px;
+  }
+}
+
+@media (width < 500px) {
+  .day {
+    gap: .5rem;
+  }
+
+  .date {
+    font-size: .8rem;
+    border-width: 2px;
   }
 }

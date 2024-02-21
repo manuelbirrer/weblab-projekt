@@ -102,3 +102,23 @@ button[disabled] {
   max-width: 100%;
   padding: 1rem;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+a.active {
+  color: var(--accent);
+}
+
+
+@media (width < 500px) {
+  .container {
+    padding: 0;
+  }
+}

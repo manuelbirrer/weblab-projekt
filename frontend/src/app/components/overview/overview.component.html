@@ -8,8 +8,11 @@
         </div>
         @for (meal of day.meals; track meal) {
           <a class="meal" routerLink="/meal/{{meal._id}}">
-            <p>{{ meal.date | date:"HH:mm" }}</p>
-            <p>{{ meal.recipe }}</p>
+            <div class="time">
+              <img src="/assets/icons/clock.svg" alt="Time">
+              {{ meal.date | date:"HH:mm" }}
+            </div>
+            <p class="recipe">{{ meal.recipe }}</p>
           </a>
         }
       </div>
