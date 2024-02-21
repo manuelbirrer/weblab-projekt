@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {MealService} from "../../services/meal.service";
 import {DateHelper, DayOfMeals, Week} from "../../calendar";
-import {DatePipe, UpperCasePipe} from "@angular/common";
+import {DatePipe, formatDate, UpperCasePipe} from "@angular/common";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 
 @Component({
@@ -20,7 +20,8 @@ export class OverviewComponent implements OnInit {
   today: Date = new Date();
   week: Week | undefined;
 
-  constructor(private route: ActivatedRoute, private mealService: MealService) {}
+  constructor(private route: ActivatedRoute, private mealService: MealService, @Inject(LOCALE_ID) public locale: string) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -49,4 +50,8 @@ export class OverviewComponent implements OnInit {
   isToday(date: Date) {
     return DateHelper.isSameDay(this.today, date);
   }
+
+  protected readonly DateHelper = DateHelper;
+  protected readonly DatePipe = DatePipe;
+  protected readonly formatDate = formatDate;
 }

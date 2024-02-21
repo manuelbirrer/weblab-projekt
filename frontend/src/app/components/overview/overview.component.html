@@ -6,15 +6,18 @@
           <p>{{ day.date | date:"dd.MM" }}</p>
           <p>{{ day.date | date:"E" | uppercase }}</p>
         </div>
-        @for (meal of day.meals; track meal) {
-          <a class="meal" routerLink="/meal/{{meal._id}}">
-            <div class="time">
-              <img src="/assets/icons/clock.svg" alt="Time">
-              {{ meal.date | date:"HH:mm" }}
-            </div>
-            <p class="recipe">{{ meal.recipe }}</p>
-          </a>
-        }
+        <div class="meals">
+          @for (meal of day.meals; track meal) {
+            <a class="meal" routerLink="/meal/{{meal._id}}">
+              <div class="time">
+                <img src="/assets/icons/clock.svg" alt="Time">
+                {{ meal.date | date:"HH:mm" }}
+              </div>
+              <p class="recipe">{{ meal.recipe }}</p>
+            </a>
+          }
+        </div>
+        <a class="add-meal" routerLink="/meal/new" [queryParams]="{date: formatDate(day.date, 'yyyy-MM-dd', locale)}">+</a>
       </div>
     }
   </div>

@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
 import {FormsModule, NgForm} from "@angular/forms";
-import { Meal } from '../../models/meal';
+import {Meal} from '../../models/meal';
 import {DateHelper} from "../../calendar";
 import {MealService} from "../../services/meal.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-new-meal',
@@ -25,11 +26,15 @@ export class NewMealComponent implements OnInit {
     recipe: ""
   }
 
-  constructor(private userService: UserService, private mealService: MealService) {
+  constructor(private route: ActivatedRoute, private userService: UserService, private mealService: MealService) {
   }
 
   ngOnInit() {
     this.getUsers();
+    const date = this.route.snapshot.queryParamMap.get('date');
+    if (date) {
+      this.model.date = date;
+    }
   }
 
   getUsers() {
