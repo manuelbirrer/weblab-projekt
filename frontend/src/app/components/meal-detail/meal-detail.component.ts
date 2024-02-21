@@ -20,14 +20,13 @@ import {AuthService} from "../../services/auth.service";
 export class MealDetailComponent implements OnInit {
   meal: Meal | undefined;
   isGuest: boolean = false;
-  userId: string;
+  userId: string | undefined;
 
-  constructor(private route: ActivatedRoute, private mealService: MealService, private authService: AuthService) {
-    this.userId = this.authService.getUserId();
-  }
+  constructor(private route: ActivatedRoute, private mealService: MealService, private authService: AuthService) {}
 
   ngOnInit() {
     this.getMeal();
+    this.authService.getUserId().subscribe(userId => this.userId = userId);
   }
 
   getMeal() {
@@ -41,22 +40,23 @@ export class MealDetailComponent implements OnInit {
   }
 
   joinMeal() {
-    if (this.meal && this.meal._id) {
+    if (this.meal && this.meal._id && this.userId) {
       this.mealService.addGuestToMeal(this.meal._id, this.userId)
         .subscribe(() => {
           this.isGuest = true;
-          this.meal?.guests?.push(this.userId);
+          this.meal?.guests?.push(this.userId as string);
         });
     }
   }
 
   leaveMeal() {
-    if (this.meal && this.meal._id) {
+    if (this.meal && this.meal._id && this.userId) {
       this.mealService.removeGuestFromMeal(this.meal._id, this.userId)
         .subscribe(() => {
           this.isGuest = false;
           if (this.meal) {
             this.meal.guests = this.meal?.guests?.filter(guest => guest !== this.userId);
+            console.log(this.meal.guests);
           }
         });
     }

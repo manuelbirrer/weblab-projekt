@@ -2,18 +2,24 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment as env} from "../../environments/environment";
 import {LoginResponse} from "../models/login-response";
-import {map} from "rxjs";
+import {BehaviorSubject, map, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  userId = new BehaviorSubject<string|undefined>(undefined);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const userId = localStorage.getItem("user_id");
+    if (userId) {
+      this.userId.next(userId);
+    }
+  }
 
   login(username: string, password: string) {
     return this.http.post<LoginResponse>(`${env.apiUrl}/login`, {username: username, password: password})
-      .pipe(map(this.setSession));
+      .pipe(map(this.setSession.bind(this)));
   }
 
   private setSession(loginResponse: LoginResponse) {
@@ -21,6 +27,7 @@ export class AuthService {
       localStorage.setItem("access_token", loginResponse.jwt.access_token);
       localStorage.setItem("expires_at", loginResponse.jwt.expires_at);
       localStorage.setItem("user_id", loginResponse.jwt.user_id);
+      this.userId.next(loginResponse.jwt.user_id);
     }
     return loginResponse;
   }
@@ -49,6 +56,6 @@ export class AuthService {
   }
 
   getUserId() {
-    return localStorage.getItem("user_id") ?? "";
+    return this.userId;
   }
 }

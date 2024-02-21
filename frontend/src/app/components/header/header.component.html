@@ -8,7 +8,9 @@
       }
     </nav>
     <div class="profile">
-      <app-user [id]="userId"></app-user>
+      @if (userId) {
+        <app-user [id]="userId"></app-user>
+      }
       <app-logout></app-logout>
     </div>
   }

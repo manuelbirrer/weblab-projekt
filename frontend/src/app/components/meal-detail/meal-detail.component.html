@@ -11,7 +11,7 @@
       <div>
         Guests:
         <div class="guests">
-          @for (guest of meal.guests; track meal) {
+          @for (guest of meal.guests; track guest) {
             <app-user id="{{guest}}"></app-user>
           }
         </div>
