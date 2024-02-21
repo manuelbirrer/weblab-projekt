@@ -1,4 +1,35 @@
-.guests {
+.meal-detail {
+  display: flex;
+  justify-content: center;
+}
+
+.meal-detail-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  flex-basis: 400px;
+}
+
+.date, .time {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.date img, .time img {
+  width: 32px;
+  margin-right: .25rem;
+}
+
+.note {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: .5rem 1rem;
+}
+
+.users {
   display: inline-flex;
+  flex-wrap: wrap;
   gap: .5rem;
 }

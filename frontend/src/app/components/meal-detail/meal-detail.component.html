@@ -1,26 +1,39 @@
 @if (meal) {
   <div class="meal-detail">
-    <p>Date: {{ meal.date | date : 'medium' }}</p>
-    <p>Recipe: {{ meal.recipe }}</p>
-    <p>
-      Cook:
+    <div class="meal-detail-inner">
+      <h1>{{ meal.recipe }}</h1>
+      <div class="datetime">
+        <div class="date">
+          <img src="/assets/icons/calendar.svg" alt="Date">
+          <span>{{ meal.date | date : 'mediumDate' }}</span>
+        </div>
+        <div class="time">
+          <img src="/assets/icons/clock.svg" alt="Time">
+          <span>{{ meal.date | date : 'shortTime' }}</span>
+        </div>
+      </div>
       <app-user id="{{meal.cook}}"></app-user>
-    </p>
-    <p>Note: {{ meal.note }}</p>
-    @if (meal.guests) {
-      <div>
-        Guests:
-        <div class="guests">
+      @if (meal.note) {
+        <div class="note">
+          {{meal.note}}
+        </div>
+      }
+      <div class="guests">
+        <h2>Extra mouths</h2>
+        <div class="users">
           @for (guest of meal.guests; track guest) {
             <app-user id="{{guest}}"></app-user>
           }
+          @empty {
+            None
+          }
         </div>
       </div>
-    }
-    @if (!isGuest) {
-      <button (click)="joinMeal()">Join</button>
-    } @else {
-      <button (click)="leaveMeal()">Leave</button>
-    }
+      @if (!isGuest) {
+        <button (click)="joinMeal()">Count me in</button>
+      } @else {
+        <button (click)="leaveMeal()">Can't make it</button>
+      }
+    </div>
   </div>
 }
