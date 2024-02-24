@@ -1,6 +1,7 @@
 .meal-detail {
   display: flex;
   justify-content: center;
+  padding: 1rem;
 }
 
 .meal-detail-inner {
@@ -15,11 +16,11 @@
   font-size: 1.5rem;
   display: flex;
   align-items: center;
+  gap: .25rem;
 }
 
 .date img, .time img {
   width: 32px;
-  margin-right: .25rem;
 }
 
 .note {

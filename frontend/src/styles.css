@@ -24,6 +24,8 @@ input, button, textarea, select {
   --accent-focus: #0b564f;
   --accent-muted: #3d5d5a;
   --white: white;
+  --red: #d23e37;
+  --red-focus: #ab3a34;
   --light-font: white;
   --card-bg: #e0e0e0;
   --card-radius: .75rem;
@@ -91,6 +93,14 @@ button:hover {
 
 button[disabled] {
   background: var(--accent-muted);
+}
+
+button.red {
+  background: var(--red);
+}
+
+button.red:hover {
+  background: var(--red-focus);
 }
 
 .ng-invalid.ng-touched {
