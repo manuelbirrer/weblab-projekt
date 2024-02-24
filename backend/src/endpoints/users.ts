@@ -13,7 +13,7 @@ publicRouter.post("/", async (req, res) => {
     const username = req.body["username"];
     if (await User.findOne({username: username})) {
         res.status(400);
-        res.json({message: "Username in use"});
+        res.json({message: "Username already in use"});
         return;
     }
     try {
