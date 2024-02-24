@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   model = {
     username: "",
     password: ""
-  }
+  };
+  error: string | undefined;
 
   constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {
   }
@@ -29,10 +30,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    delete this.error;
     if (form.valid) {
       this.authService.login(this.model.username, this.model.password)
-        .subscribe((data) => {
-          this.router.navigateByUrl(this.redirectUrl());
+        .subscribe({
+          next: () => {
+            this.router.navigateByUrl(this.redirectUrl());
+          },
+          error: error => {
+            this.error = error.error.message;
+          }
         });
     }
   }

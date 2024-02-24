@@ -10,6 +10,9 @@
       <input type="password" name="password" [(ngModel)]="model.password" required>
     </label>
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    @if (error) {
+      <span class="error-box">{{error}}</span>
+    }
     <p>
       No account yet?
       <a routerLink="/register">Sign up</a>

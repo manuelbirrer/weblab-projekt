@@ -24,8 +24,9 @@ input, button, textarea, select {
   --accent-focus: #0b564f;
   --accent-muted: #3d5d5a;
   --white: white;
-  --red: #d23e37;
-  --red-focus: #ab3a34;
+  --red: #c11b10;
+  --red-focus: #ad170d;
+  --red-alpha: #d23e3711;
   --light-font: white;
   --card-bg: #e0e0e0;
   --card-radius: .75rem;
@@ -80,6 +81,14 @@ textarea {
   color: red;
 }
 
+.error-box {
+  border: 1px solid var(--red);
+  color: var(--red);
+  border-radius: var(--input-radius);
+  padding: .25rem .5rem;
+  background: var(--red-alpha);
+}
+
 button {
   border: none;
   color: var(--light-font);
@@ -125,7 +134,6 @@ a:hover {
 a.active {
   color: var(--accent);
 }
-
 
 @media (width < 500px) {
   .container {
