@@ -26,7 +26,7 @@ input, button, textarea, select {
   --white: white;
   --red: #c11b10;
   --red-focus: #ad170d;
-  --red-alpha: #d23e3711;
+  --error-bg: #d23e3711;
   --light-font: white;
   --card-bg: #e0e0e0;
   --card-radius: .75rem;
@@ -86,7 +86,7 @@ textarea {
   color: var(--red);
   border-radius: var(--input-radius);
   padding: .25rem .5rem;
-  background: var(--red-alpha);
+  background: var(--error-bg);
 }
 
 button {

@@ -5,7 +5,7 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {Meal} from '../../models/meal';
 import {DateHelper} from "../../calendar";
 import {MealService} from "../../services/meal.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-meal',
@@ -25,8 +25,9 @@ export class NewMealComponent implements OnInit {
     note: "",
     recipe: ""
   }
+  error: string | undefined;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private mealService: MealService) {
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private mealService: MealService) {
   }
 
   ngOnInit() {
@@ -42,6 +43,7 @@ export class NewMealComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    delete this.error;
     if (form.valid) {
       const meal: Meal = {
         cook: this.model.cook,
@@ -50,7 +52,14 @@ export class NewMealComponent implements OnInit {
         note: this.model.note
       }
       this.mealService.addMeal(meal)
-        .subscribe(response => console.log(response));
+        .subscribe({
+          next: response => {
+            this.router.navigateByUrl(`/meal/${response.id}`);
+          },
+          error: error => {
+            this.error = error.error.message;
+          }
+        });
     }
   }
 

@@ -32,12 +32,12 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        await Meal.create(req.body)
-        res.json({});
+        const meal = await Meal.create(req.body);
+        res.json({id: meal._id});
         return;
     } catch (e) {
         res.status(400);
-        res.json({});
+        res.json({message: "Something went wrong"});
         return;
     }
 })
