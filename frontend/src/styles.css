@@ -78,7 +78,7 @@ textarea {
 }
 
 .error {
-  color: red;
+  color: var(--red);
 }
 
 .error-box {
@@ -113,7 +113,7 @@ button.red:hover {
 }
 
 .ng-invalid.ng-touched {
-  border-color: red;
+  border-color: var(--red);
 }
 
 .container {
