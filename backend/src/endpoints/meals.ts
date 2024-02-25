@@ -40,10 +40,30 @@ router.post("/", async (req, res) => {
         res.json({message: "Something went wrong"});
         return;
     }
-})
+});
 
 router.get("/:id", async (req, res) => {
-    res.json(await Meal.findById(req.params.id));
+    try {
+        const meal = await Meal.findById(req.params.id);
+        res.json(meal);
+        return;
+    } catch (e) {
+        res.status(404);
+        res.json({message: "Not found"});
+        return;
+    }
+});
+
+router.put("/:id", async (req, res) => {
+    try {
+        await Meal.findByIdAndUpdate(req.params.id, req.body);
+        res.json({})
+        return;
+    } catch (e) {
+        res.status(400);
+        res.json({message: "Something went wrong"});
+        return;
+    }
 });
 
 router.post("/:id/guests", async (req, res) => {

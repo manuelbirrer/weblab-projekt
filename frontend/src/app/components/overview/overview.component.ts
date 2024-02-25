@@ -51,7 +51,5 @@ export class OverviewComponent implements OnInit {
     return DateHelper.isSameDay(this.today, date);
   }
 
-  protected readonly DateHelper = DateHelper;
-  protected readonly DatePipe = DatePipe;
   protected readonly formatDate = formatDate;
 }

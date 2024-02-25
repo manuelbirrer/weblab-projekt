@@ -31,6 +31,10 @@ export class MealService {
     return this.http.post<any>(`${env.apiUrl}/meals`, meal);
   }
 
+  updateMeal(id: string, meal: Meal) {
+    return this.http.put<any>(`${env.apiUrl}/meals/${id}`, meal);
+  }
+
   addGuestToMeal(mealId: string, userId: string) {
     return this.http.post(`${env.apiUrl}/meals/${mealId}/guests`, {guest: userId});
   }

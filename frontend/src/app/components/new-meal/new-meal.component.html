@@ -1,6 +1,6 @@
 <div class="new-meal">
   <form #mealForm="ngForm" (ngSubmit)="onSubmit(mealForm)">
-    <h1>Add meal</h1>
+    <h1>{{ this.id ? "Edit meal" : "Add meal" }}</h1>
     <label>
       Date
       <input type="date" name="date" #date="ngModel" [(ngModel)]="model.date" required>
