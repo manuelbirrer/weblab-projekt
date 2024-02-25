@@ -6,49 +6,37 @@ export const router = express.Router();
 
 publicRouter.post("/", async (req, res) => {
     if (!req.body["username"] || !req.body["password"]) {
-        res.status(400);
-        res.json({message: "Missing fields"});
-        return;
+        return res.status(400).json({message: "Missing fields"});
     }
     const username = req.body["username"];
     if (await User.findOne({username: username})) {
-        res.status(400);
-        res.json({message: "Username already in use"});
-        return;
+        return res.status(400).json({message: "Username already in use"});
     }
     try {
         const user = await User.create({
             username: username,
             password: req.body["password"]
         });
-        res.location("/users/" + user._id);
-        res.status(201);
-        res.json({});
-        return;
+        return res.location("/users/" + user._id).status(201).json({});
     } catch (e) {
-        res.status(400);
-        res.json({})
-        return;
+        return res.status(400).json({});
     }
 });
 
 
 router.get("/", async (req, res) => {
-    res.json(await User.find().select(["username", "verified"]));
+    return res.json(await User.find().select(["username", "verified"]));
 });
 
 router.get("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            throw new Error("User not found");
+            return res.status(404).json({message: "Not found"});
         }
-        res.json(user);
-        return;
+        return res.json(user);
     } catch (e) {
-        res.status(404);
-        res.json({});
-        return;
+        return res.status(404).json({message: "Not found"});
     }
 });
 
@@ -56,24 +44,19 @@ router.put("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            throw new Error("User not found");
+            return res.status(404).json({message: "Not found"});
         }
     } catch (e) {
-        res.status(404);
-        res.json({});
-        return;
+        return res.status(404).json({message: "Not found"});
     }
     const update: any = {};
     if (req.body["verified"]) {
         update.verified = req.body.verified;
     }
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, update);
-        res.json({});
-        return;
+        await User.findByIdAndUpdate(req.params.id, update);
+        return res.json({});
     } catch (e) {
-        res.status(400);
-        res.json({});
-        return;
+        return res.status(400).json({});
     }
 });

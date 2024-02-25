@@ -10,9 +10,7 @@ router.get("/", async (req, res) => {
     if (req.query["from"]) {
         const fromDate = new Date(req.query.from as string);
         if (isNaN(fromDate.valueOf())) {
-            res.status(400);
-            res.send({status: 400, message: "'from' is not a valid date"});
-            return;
+            return res.status(400).send({status: 400, message: "'from' is not a valid date"});
         }
         if (!filter['date']) filter.date = {};
         filter.date.$gte = fromDate
@@ -21,14 +19,12 @@ router.get("/", async (req, res) => {
     if (req.query["to"]) {
         const toDate = new Date(req.query.to as string);
         if (isNaN(toDate.valueOf())) {
-            res.status(400);
-            res.send({status: 400, message: "'to' is not a valid date"});
-            return;
+            return res.status(400).send({status: 400, message: "'to' is not a valid date"});
         }
         if (!filter['date']) filter.date = {};
         filter.date.$lte = toDate
     }
-    res.json(await Meal.find(filter));
+    return res.json(await Meal.find(filter));
 });
 
 router.post("/", async (req: JWTRequest, res) => {
@@ -37,24 +33,21 @@ router.post("/", async (req: JWTRequest, res) => {
     newMeal.modifiedBy = req.auth?.user;
     try {
         const meal = await Meal.create(newMeal);
-        res.json({id: meal._id});
-        return;
+        return res.json({id: meal._id});
     } catch (e) {
-        res.status(400);
-        res.json({message: "Something went wrong"});
-        return;
+        return res.status(400).json({message: "Something went wrong"});
     }
 });
 
 router.get("/:id", async (req, res) => {
     try {
         const meal = await Meal.findById(req.params.id);
-        res.json(meal);
-        return;
+        if (!meal) {
+            return res.status(404).json({message: "Not found"});
+        }
+        return res.json(meal);
     } catch (e) {
-        res.status(404);
-        res.json({message: "Not found"});
-        return;
+        return res.status(404).json({message: "Not found"});
     }
 });
 
@@ -64,38 +57,28 @@ router.put("/:id", async (req: JWTRequest, res) => {
     try {
         const meal = await Meal.findById(req.params.id);
         if (!meal) {
-            res.status(404);
-            res.json({message: "Not found"});
-            return;
+            return res.status(404).json({message: "Not found"});
         }
         Object.assign(meal, update);
         await meal.save();
-        res.json({})
-        return;
+        return res.json({});
     } catch (e) {
-        res.status(400);
-        res.json({message: "Something went wrong"});
-        return;
+        return res.status(400).json({message: "Something went wrong"});
     }
 });
 
 router.post("/:id/guests", async (req, res) => {
     if (!req.body["guest"]) {
-        res.status(400);
-        res.json({ status: 400, message: "No guest specified"});
-        return;
+        return res.status(400).json({ status: 400, message: "No guest specified"});
     }
     try {
         await Meal.findByIdAndUpdate(
             req.params.id,
             {$addToSet: {guests: req.body.guest}}
         );
-        res.json({});
-        return;
+        return res.json({});
     } catch (e) {
-        res.status(400);
-        res.json({});
-        return;
+        return res.status(400).json({});
     }
 });
 
@@ -105,11 +88,8 @@ router.delete("/:id/guests/:guestId", async (req, res) => {
             req.params.id,
             {$pull: {guests: req.params.guestId}}
         );
-        res.json({});
-        return;
+        return res.json({});
     } catch (e) {
-        res.status(400);
-        res.json({});
-        return;
+        return res.status(400).json({});
     }
 });

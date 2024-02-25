@@ -13,6 +13,11 @@ Authorization: Bearer {{token}}
 
 ###
 
+GET {{host}}/meals/65db26f8e850799aa9933d83
+Authorization: Bearer {{token}}
+
+###
+
 POST {{host}}/meals
 Authorization: Bearer {{token}}
 Content-Type: application/json
