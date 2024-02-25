@@ -1,4 +1,5 @@
 import express from "express";
+import {Request as JWTRequest} from "express-jwt";
 import Meal from "../models/meal";
 
 export const router = express.Router();
@@ -30,9 +31,11 @@ router.get("/", async (req, res) => {
     res.json(await Meal.find(filter));
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: JWTRequest, res) => {
+    const newMeal = req.body;
+    newMeal.createdBy = req.auth?.user;
     try {
-        const meal = await Meal.create(req.body);
+        const meal = await Meal.create(newMeal);
         res.json({id: meal._id});
         return;
     } catch (e) {
@@ -54,9 +57,11 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req: JWTRequest, res) => {
+    const update = req.body;
+    update.updatedBy = req.auth?.user;
     try {
-        await Meal.findByIdAndUpdate(req.params.id, req.body);
+        await Meal.findByIdAndUpdate(req.params.id, update);
         res.json({})
         return;
     } catch (e) {
