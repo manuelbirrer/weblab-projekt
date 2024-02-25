@@ -11,7 +11,7 @@ describe('LogoutComponent', () => {
 
 
   beforeEach(async () => {
-    const authServiceSpy = jasmine.createSpyObj("authService", ['getUserId', 'isLoggedIn']);
+    const authServiceSpy = jasmine.createSpyObj("authService", ['logout']);
 
     await TestBed.configureTestingModule({
       imports: [LogoutComponent],
@@ -23,11 +23,22 @@ describe('LogoutComponent', () => {
 
     fixture = TestBed.createComponent(LogoutComponent);
     component = fixture.componentInstance;
-    authService.getUserId.and.returnValue(new BehaviorSubject<string | undefined>("testUserId"));
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should log out', () => {
+    component.logout();
+    expect(authService.logout).toHaveBeenCalled();
+  });
+
+  it('should redirect after logout', () => {
+    authService.logout.and.returnValue();
+    spyOn(component['router'], 'navigateByUrl');
+    component.logout();
+    expect(component['router'].navigateByUrl).toHaveBeenCalled();
   });
 });
