@@ -1,5 +1,5 @@
-<header class="container">
-  @if (isLoggedIn()) {
+@if (isLoggedIn()) {
+  <header class="container">
     <nav>
       @for (page of pages; track page) {
         <a routerLink="{{page.link}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -13,5 +13,5 @@
       }
       <app-logout></app-logout>
     </div>
-  }
-</header>
+  </header>
+}

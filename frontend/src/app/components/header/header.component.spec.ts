@@ -43,10 +43,10 @@ describe('HeaderComponent', () => {
     expect(result).toBe(true);
   });
 
-  it('should not show nav if user is not logged in', () => {
+  it('should not show header if user is not logged in', () => {
     authService.isLoggedIn.and.returnValue(false);
     fixture.detectChanges();
-    const navElement = fixture.nativeElement.querySelector('nav');
-    expect(navElement).toBeNull();
+    const headerElement = fixture.nativeElement.querySelector('header');
+    expect(headerElement).toBeNull();
   });
 });
