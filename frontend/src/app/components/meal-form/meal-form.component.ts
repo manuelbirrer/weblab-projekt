@@ -9,15 +9,15 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {formatDate} from "@angular/common";
 
 @Component({
-  selector: 'app-new-meal',
+  selector: 'app-meal-form',
   standalone: true,
   imports: [
     FormsModule
   ],
-  templateUrl: './new-meal.component.html',
-  styleUrl: './new-meal.component.css'
+  templateUrl: './meal-form.component.html',
+  styleUrl: './meal-form.component.css'
 })
-export class NewMealComponent implements OnInit {
+export class MealFormComponent implements OnInit {
   users: User[] = [];
   id: string | undefined;
   model = {

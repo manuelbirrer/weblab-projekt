@@ -1,9 +1,9 @@
-.new-meal {
+.meal-form {
   display: flex;
   justify-content: center;
 }
 
-.new-meal form {
+.meal-form form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
