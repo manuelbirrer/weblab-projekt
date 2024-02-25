@@ -131,6 +131,10 @@ a:hover {
   color: var(--accent);
 }
 
+a:hover svg {
+  fill: var(--accent);
+}
+
 a.active {
   color: var(--accent);
 }

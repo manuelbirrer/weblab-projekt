@@ -30,8 +30,10 @@
 }
 
 .edit {
-  display: flex;
-  justify-content: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  align-self: flex-end;
 }
 
 .users {

@@ -89,6 +89,9 @@
 }
 
 .prev-week, .next-week {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   color: inherit;
 }
@@ -96,6 +99,10 @@
 .prev-week:hover, .next-week:hover {
   background: var(--accent);
   color: var(--light-font);
+}
+
+.prev-week:hover svg, .next-week:hover svg {
+  fill: var(--light-font);
 }
 
 .prev-week {
