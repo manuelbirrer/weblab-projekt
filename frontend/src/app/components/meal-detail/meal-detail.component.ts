@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MealService} from "../../services/meal.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {DatePipe} from "@angular/common";
 import { Meal } from '../../models/meal';
 import {UserService} from "../../services/user.service";
@@ -12,7 +12,8 @@ import {AuthService} from "../../services/auth.service";
   standalone: true,
   imports: [
     DatePipe,
-    UserComponent
+    UserComponent,
+    RouterLink
   ],
   templateUrl: './meal-detail.component.html',
   styleUrl: './meal-detail.component.css'
