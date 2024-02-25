@@ -137,6 +137,6 @@ a.active {
 
 @media (width < 500px) {
   .container {
-    padding: 0;
+    padding: 1rem 0 ;
   }
 }
