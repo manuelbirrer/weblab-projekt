@@ -34,6 +34,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req: JWTRequest, res) => {
     const newMeal = req.body;
     newMeal.createdBy = req.auth?.user;
+    newMeal.modifiedBy = req.auth?.user;
     try {
         const meal = await Meal.create(newMeal);
         res.json({id: meal._id});
@@ -61,7 +62,14 @@ router.put("/:id", async (req: JWTRequest, res) => {
     const update = req.body;
     update.updatedBy = req.auth?.user;
     try {
-        await Meal.findByIdAndUpdate(req.params.id, update);
+        const meal = await Meal.findById(req.params.id);
+        if (!meal) {
+            res.status(404);
+            res.json({message: "Not found"});
+            return;
+        }
+        Object.assign(meal, update);
+        await meal.save();
         res.json({})
         return;
     } catch (e) {

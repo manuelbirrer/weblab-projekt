@@ -69,3 +69,13 @@ Content-Type: application/json
 
 DELETE {{host}}/meals/65d47c88bb3c4604517f489b/guests/65cf5e7c803e30808f426606
 Authorization: Bearer {{token}}
+
+###
+
+PUT {{host}}/meals/65d47c88bb3c4604517f489d
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+
+}
