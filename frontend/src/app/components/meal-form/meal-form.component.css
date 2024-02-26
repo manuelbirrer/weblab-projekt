@@ -10,3 +10,9 @@
   max-width: 250px;
   width: 250px;
 }
+
+button.back {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+}

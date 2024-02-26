@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MealService} from "../../services/meal.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {DatePipe} from "@angular/common";
+import {DatePipe, Location} from "@angular/common";
 import { Meal } from '../../models/meal';
-import {UserService} from "../../services/user.service";
 import {UserComponent} from "../user/user.component";
 import {AuthService} from "../../services/auth.service";
 
@@ -23,7 +22,7 @@ export class MealDetailComponent implements OnInit {
   isGuest: boolean = false;
   userId: string | undefined;
 
-  constructor(private route: ActivatedRoute, private mealService: MealService, private authService: AuthService) {}
+  constructor(private route: ActivatedRoute, private location: Location, private mealService: MealService, private authService: AuthService) {}
 
   ngOnInit() {
     this.getMeal();
@@ -61,5 +60,9 @@ export class MealDetailComponent implements OnInit {
           }
         });
     }
+  }
+
+  back() {
+    this.location.back();
   }
 }

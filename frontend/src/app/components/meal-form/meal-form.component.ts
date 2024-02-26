@@ -6,7 +6,7 @@ import {Meal} from '../../models/meal';
 import {DateHelper} from "../../calendar";
 import {MealService} from "../../services/meal.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {formatDate} from "@angular/common";
+import {formatDate, Location} from "@angular/common";
 
 @Component({
   selector: 'app-meal-form',
@@ -29,7 +29,7 @@ export class MealFormComponent implements OnInit {
   }
   error: string | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private mealService: MealService, @Inject(LOCALE_ID) public locale: string) {
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location, private userService: UserService, private mealService: MealService, @Inject(LOCALE_ID) public locale: string) {
   }
 
   ngOnInit() {
@@ -111,5 +111,9 @@ export class MealFormComponent implements OnInit {
           this.error = error.error.message;
         }
       });
+  }
+
+  back() {
+    this.location.back();
   }
 }
