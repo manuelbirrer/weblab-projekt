@@ -5,7 +5,6 @@ import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {MealService} from "../../services/meal.service";
 import {of, throwError} from "rxjs";
-import {MockInstance} from "ng-mocks";
 import {HttpErrorResponse} from "@angular/common/http";
 
 describe('MealFormComponent', () => {
