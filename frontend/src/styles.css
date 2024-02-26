@@ -139,6 +139,10 @@ a.active {
   color: var(--accent);
 }
 
+a.active svg {
+  fill: var(--accent);
+}
+
 @media (width < 500px) {
   .container {
     padding: 1rem 0 ;

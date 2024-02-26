@@ -18,12 +18,6 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   userId: string | undefined;
-  pages = [
-    {
-      link: "/",
-      name: "Overview"
-    }
-  ];
 
   constructor(private authService: AuthService) {}
 

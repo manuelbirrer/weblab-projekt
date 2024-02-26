@@ -10,3 +10,18 @@ header {
   display: inline-flex;
   gap: 1rem;
 }
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+}
+
+a svg {
+  width: 2.5rem;
+  height: auto;
+}
