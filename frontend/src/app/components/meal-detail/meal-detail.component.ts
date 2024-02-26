@@ -56,7 +56,6 @@ export class MealDetailComponent implements OnInit {
           this.isGuest = false;
           if (this.meal) {
             this.meal.guests = this.meal?.guests?.filter(guest => guest !== this.userId);
-            console.log(this.meal.guests);
           }
         });
     }
