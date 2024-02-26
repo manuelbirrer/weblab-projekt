@@ -6,15 +6,15 @@ import cors from 'cors';
 import morgan from "morgan";
 import {expressjwt} from "express-jwt";
 
-import {router as loginRouter} from "./endpoints/login";
-import {router as mealsRouter} from "./endpoints/meals";
-import {router as usersRouter, publicRouter as publicUsersRouter} from "./endpoints/users";
+import {router as loginRouter} from "./endpoints/login.js";
+import {router as mealsRouter} from "./endpoints/meals.js";
+import {router as usersRouter, publicRouter as publicUsersRouter} from "./endpoints/users.js";
 
 dotenv.config();
 
-const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, JWT_SECRET, JWT_EXPIRES_IN_SECONDS } = process.env;
+const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, JWT_SECRET, JWT_EXPIRES_IN_SECONDS, CORS_ORIGIN } = process.env;
 
-if (!DB_HOST || !DB_NAME || !DB_USER || !DB_PASSWORD || !JWT_SECRET || !JWT_EXPIRES_IN_SECONDS) {
+if (!DB_HOST || !DB_NAME || !DB_USER || !DB_PASSWORD || !JWT_SECRET || !JWT_EXPIRES_IN_SECONDS || !CORS_ORIGIN) {
     console.error("One ore more env vars not set");
     process.exit(1);
 }
@@ -38,7 +38,7 @@ const eJwt = expressjwt({
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:4200'
+    origin: CORS_ORIGIN
 }));
 
 app.use(bodyParser.json());

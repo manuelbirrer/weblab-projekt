@@ -1,6 +1,6 @@
 import express from "express";
 import {Request as JWTRequest} from "express-jwt";
-import Meal from "../models/meal";
+import Meal from "../models/meal.js";
 
 export const router = express.Router();
 
