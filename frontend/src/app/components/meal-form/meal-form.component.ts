@@ -69,7 +69,7 @@ export class MealFormComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(users => this.users = users);
+    this.userService.getVerifiedUsers().subscribe(users => this.users = users);
   }
 
   onSubmit(form: NgForm) {

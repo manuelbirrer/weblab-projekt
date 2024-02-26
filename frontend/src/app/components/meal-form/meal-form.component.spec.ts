@@ -15,7 +15,7 @@ describe('MealFormComponent', () => {
   let activatedRoute: ActivatedRoute;
 
   beforeEach(async () => {
-    const userServiceSpy = jasmine.createSpyObj("userService", ["getUsers"]);
+    const userServiceSpy = jasmine.createSpyObj("userService", ["getVerifiedUsers"]);
     const mealServiceSpy = jasmine.createSpyObj("mealService", ["getMeal", "addMeal", "updateMeal"]);
 
     await TestBed.configureTestingModule({
@@ -50,7 +50,7 @@ describe('MealFormComponent', () => {
 
     fixture = TestBed.createComponent(MealFormComponent);
     component = fixture.componentInstance;
-    userService.getUsers.and.returnValue(of([]));
+    userService.getVerifiedUsers.and.returnValue(of([]));
     fixture.detectChanges();
   });
 
@@ -60,7 +60,7 @@ describe('MealFormComponent', () => {
 
   it('should get users', () => {
     const testUsers = [{_id: "testUser1", username: "testUser1"}]
-    userService.getUsers.and.returnValue(of(testUsers));
+    userService.getVerifiedUsers.and.returnValue(of(testUsers));
     component.getUsers();
     expect(component.users).toBe(testUsers);
   });

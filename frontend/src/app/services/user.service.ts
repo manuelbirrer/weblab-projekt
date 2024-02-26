@@ -22,6 +22,15 @@ export class UserService {
       }));
   }
 
+  getVerifiedUsers() {
+    return this.http.get<User[]>(`${env.apiUrl}/users?verified=true`)
+      .pipe(tap(users => {
+        users.forEach(user => {
+          this.cache.set(user._id, user);
+        });
+      }));
+  }
+
   getUser(id: string) {
     if (this.cache.has(id)) {
       return of(this.cache.get(id));

@@ -25,7 +25,22 @@ publicRouter.post("/", async (req, res) => {
 
 
 router.get("/", async (req, res) => {
-    return res.json(await User.find().select(["username", "verified"]));
+    const filter: {verified?: boolean } = {};
+    if (req.query["verified"]) {
+        if (req.query.verified as string === "true") {
+            filter.verified = true;
+        } else if (req.query.verified as string === "false") {
+            filter.verified = false;
+        } else {
+            return res.status(400).send({message: "'verified' must be true or false"});
+        }
+    }
+    try {
+        const users = await User.find(filter).select(["username", 'verified']);
+        return res.json(users);
+    } catch (e) {
+        return res.status(400).json({message: "Something went wrong"});
+    }
 });
 
 router.get("/:id", async (req, res) => {
