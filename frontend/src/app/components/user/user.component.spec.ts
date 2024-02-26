@@ -29,4 +29,18 @@ describe('UserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call getUser on initialization', () => {
+    component.id = "testUserId";
+    userService.getUser.and.returnValue(of({_id: "testUserId", username: "testUser"}));
+    component.ngOnInit();
+    expect(userService.getUser).toHaveBeenCalledWith("testUserId");
+  });
+
+  it('should return a valid hue', () => {
+    component.id = "testUserId";
+    const hue = component.getHue();
+    expect(hue).toBeGreaterThanOrEqual(0);
+    expect(hue).toBeLessThan(360);
+  });
 });

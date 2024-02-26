@@ -23,9 +23,13 @@ export class UserComponent implements OnInit {
   }
 
   getBackgroundColor() {
+    return `hsl(${this.getHue()}deg, 60%, 70%)`;
+  }
+
+  getHue() {
     const hash = [...this.id].reduce((acc, char) => {
       return char.charCodeAt(0) + ((acc << 5) - acc);
     }, 0);
-    return `hsl(${hash % 360}deg, 60%, 70%`;
+    return Math.abs(hash) % 360;
   }
 }
