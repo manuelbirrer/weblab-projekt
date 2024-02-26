@@ -4,13 +4,21 @@ import { MealDetailComponent } from './meal-detail.component';
 import {ActivatedRoute} from "@angular/router";
 import {MealService} from "../../services/meal.service";
 import {AuthService} from "../../services/auth.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
+import {Meal} from "../../models/meal";
 
 describe('MealDetailComponent', () => {
   let component: MealDetailComponent;
   let fixture: ComponentFixture<MealDetailComponent>;
   let mealService: jasmine.SpyObj<MealService>;
   let authService: jasmine.SpyObj<AuthService>;
+
+  const testMeal: Meal = {
+    _id: "testMealId",
+    date: new Date("2024-01-01T18:00:00"),
+    recipe: "test recipe",
+    cook: "testCookId",
+  }
 
   beforeEach(async () => {
     const mealServiceSpy = jasmine.createSpyObj("mealService", ["getMeal", "addGuestToMeal", "removeGuestFromMeal"]);
@@ -48,5 +56,21 @@ describe('MealDetailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should join meal', () => {
+    component.meal = testMeal;
+    component.userId = "testUserId";
+    mealService.addGuestToMeal.and.returnValue(of({}));
+    component.joinMeal();
+    expect(mealService.addGuestToMeal).toHaveBeenCalledWith(testMeal._id as string, "testUserId");
+  });
+
+  it('should leave meal', () => {
+    component.meal = testMeal;
+    component.userId = "testUserId";
+    mealService.removeGuestFromMeal.and.returnValue(of({}));
+    component.leaveMeal();
+    expect(mealService.removeGuestFromMeal).toHaveBeenCalledWith(testMeal._id as string, "testUserId");
   });
 });
