@@ -5,7 +5,7 @@ services:
     container_name: weblab_frontend
     restart: always
     ports:
-      - "80:80"
+      - "4000:80"
     depends_on:
       - backend
 

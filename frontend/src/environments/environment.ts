@@ -2,5 +2,5 @@ import {IEnvironment} from "./ienvironment";
 
 export const environment: IEnvironment = {
   production: true,
-  apiUrl: "http://localhost:3000"
+  apiUrl: "https://api.weblab.piing.ch"
 };
