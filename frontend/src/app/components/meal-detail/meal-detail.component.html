@@ -33,10 +33,12 @@
           }
         </div>
       </div>
-      @if (!isGuest) {
-        <button (click)="joinMeal()">Count me in</button>
-      } @else {
-        <button class="red" (click)="leaveMeal()">Can't make it</button>
+      @if (userId !== meal.cook) {
+        @if (!isGuest) {
+          <button (click)="joinMeal()">Count me in</button>
+        } @else {
+          <button class="red" (click)="leaveMeal()">Can't make it</button>
+        }
       }
     </div>
   </div>
