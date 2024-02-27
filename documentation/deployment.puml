@@ -1,0 +1,28 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+Node(computer, "Computer des Nutzers") {
+    Node(browser, "Browser") {
+        Container(spa, "SPA", "Angular")
+    }
+}
+
+Node(server, "Server") {
+    Node(dk_nginx, "Docker Container") {
+        Container(app, "Web App", "NGINX")
+    }
+
+    Node(dk_mongo, "Docker Container") {
+        ContainerDb(mongo, "Database", "MongoDB")
+    }
+
+    Node(dk_api, "Docker Container") {
+        Container(api, "API", "Node.js, Express and Mongoose")
+    }
+}
+
+Rel(app,spa,"sendet zum Browser")
+Rel(spa,api,"macht API Requests an")
+Rel(api,mongo,"liest/schreibt")
+
+@enduml
